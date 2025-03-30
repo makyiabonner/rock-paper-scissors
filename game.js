@@ -22,13 +22,15 @@ GAME
         Update Game Info (Current Game, Record, Winner/Loser)
     Ask if User wishes to restart game
 */
+let stats = {
+  totalGames: Number(localStorage.getItem("total games")) || 0,
+  userWins: Number(localStorage.getItem("wins")) || 0,
+  userLosses: Number(localStorage.getItem("losses")) || 0,
+  userDraws: Number(localStorage.getItem("draws")) || 0,
+  allTimeRecord: localStorage.getItem("All-Time Record"),
+};
 
-let totalGames = Number(localStorage.getItem("total games")) || 0;
-let userWins = Number(localStorage.getItem("wins")) || 0;
-let userLosses = Number(localStorage.getItem("losses")) || 0;
-let userDraws = Number(localStorage.getItem("draws")) || 0;
-let allTimeRecord = localStorage.getItem("All-Time Record");
-let userRecord = `Your All-Time Record is: ${userWins}-${userLosses}-${userDraws}`;
+let userRecord = `Your All-Time Record is: ${stats.userWins}-${stats.userLosses}-${stats.userDraws}`;
 
 const GAME_CHOICES = ["rock", "paper", "scissors"];
 
@@ -50,26 +52,27 @@ function cpuPick() {
 }
 
 function setLocalStorage() {
-  localStorage.setItem("total games", totalGames);
-  localStorage.setItem("wins", userWins);
-  localStorage.setItem("losses", userLosses);
-  localStorage.setItem("draws", userDraws);
+  localStorage.setItem("total games", stats.totalGames);
+  localStorage.setItem("wins", stats.userWins);
+  localStorage.setItem("losses", stats.userLosses);
+  localStorage.setItem("draws", stats.userDraws);
   localStorage.setItem("All-Time Record", userRecord);
 }
 
 function updateGameResults(str) {
-  debugger;
-  totalGames++;
+  stats.totalGames++;
   if (str === "win") {
-    userWins++;
-    alert(`GAME:${totalGames} YOU WIN, ${userRecord}`);
+    stats.userWins++;
+    alert(`GAME:${stats.totalGames} YOU WIN, ${userRecord}`);
   } else if (str === "lose") {
-    userLosses++;
-    alert(`GAME:${totalGames} YOU LOSE, ${userRecord}`);
+    stats.userLosses++;
+    alert(`GAME:${stats.totalGames} YOU LOSE, ${userRecord}`);
   } else if (str === "draw") {
-    userDraws++;
-    alert(`GAME:${totalGames} DRAW, ${userRecord}`);
+    stats.userDraws++;
+    alert(`GAME:${stats.totalGames} DRAW, ${userRecord}`);
   }
+  userRecord = `Your All-Time Record is: ${stats.userWins}-${stats.userLosses}-${stats.userDraws}`;
+  setLocalStorage();
 }
 
 function restartGame(callback, userCallback, cpuCallback) {
@@ -78,7 +81,6 @@ function restartGame(callback, userCallback, cpuCallback) {
     : alert("Thanks for playing, refresh page if you change your mind.");
 }
 function game(userCallback, cpuCallback) {
-  debugger;
   let user = userCallback();
   let cpu = cpuCallback();
 
@@ -103,9 +105,6 @@ function game(userCallback, cpuCallback) {
   }
 
   updateGameResults(result);
-  setLocalStorage();
   restartGame(game, userCallback, cpuCallback);
 }
-console.log(GAME_CHOICES.indexOf("rock"));
 game(userPick, cpuPick);
-console.log("pencil");
