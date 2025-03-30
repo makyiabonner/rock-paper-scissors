@@ -1,18 +1,24 @@
 /*
-need array consisting of choices
+This is a game of rock paper scissors
+user is prompted to input rock paper or scissors
+function is then generated for opponent to make a random 
+   choice as well
+Winner is then decided, also game and record is also displayed
 
-need to generate computer choices
-    -random number generator to pick from choices array length
-    -return choice
+User Pick
+    Prompt user to pick
 
-need to generate human choices
-    -prompt user to input choice
-    -if user choice isn't valid, alert user choice isn't optional
-    -return choice in lowercase format to match array's options
-    
-need to generate winner/loser
-    -generate game flow as far as rules(paper beats rock, rock beats scissors, etc.) 
-      to determine winner and loser
-    -if user and cpu have the same choice, return draw
-    -use alert to show user the round winner/loser along with current game and record
+Validate User Pick
+    Check if user pick is valid by checking array's options
+
+CPU Pick
+    CPU generates random number to pluck from array
+
+GAME
+    Runs and Store User Pick
+    Validates User Pick or Restarts Game
+    Runs and Store CPU Pick
+    Have if statements to mandate game rules
+        Update Game Info (Current Game, Record, Winner/Loser)
+    Ask if User wishes to restart game
 */
