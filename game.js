@@ -37,8 +37,7 @@ function userPick() {
 }
 
 function validatePick(pick, userCallback, cpuCallback) {
-  debugger;
-  if (GAME_CHOICES[GAME_CHOICES.indexOf(pick)] === pick) {
+  if (GAME_CHOICES.includes(pick)) {
     return pick;
   } else {
     alert("Your choice is invalid, try again");
@@ -47,7 +46,7 @@ function validatePick(pick, userCallback, cpuCallback) {
 }
 
 function cpuPick() {
-  return GAME_CHOICES[Math.floor(Math.random() * GAME_CHOICES.length - 1)];
+  return GAME_CHOICES[Math.floor(Math.random() * GAME_CHOICES.length)];
 }
 
 function setLocalStorage() {
@@ -59,6 +58,7 @@ function setLocalStorage() {
 }
 
 function updateGameResults(str) {
+  debugger;
   totalGames++;
   if (str === "win") {
     userWins++;
@@ -78,6 +78,7 @@ function restartGame(callback, userCallback, cpuCallback) {
     : alert("Thanks for playing, refresh page if you change your mind.");
 }
 function game(userCallback, cpuCallback) {
+  debugger;
   let user = userCallback();
   let cpu = cpuCallback();
 
@@ -97,7 +98,7 @@ function game(userCallback, cpuCallback) {
     (cpu == "scissors" && user == "paper")
   ) {
     result = "lose";
-  } else if (user == cpu) {
+  } else if (user === cpu) {
     result = "draw";
   }
 
